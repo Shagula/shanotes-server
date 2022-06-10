@@ -2,12 +2,14 @@ create database shanotes;
 create user shanotes@'localhost' identified by 'shanotes';
 grant all on shanotes.* to shanotes@'localhost' identified by 'shanotes';
 use shanotes;
+
 create table user(
-  id int primary key,
-  name varchar(200),
+  id int primary key auto_increment,
+  name varchar(200) unique,
   password varchar(200),
   access int
 );
+
 create table notes (
   id int primary key,
   title varchar(200),
@@ -30,8 +32,8 @@ create table notebooks (
 );
 
 create table file (
-  
-)
+
+);
 
 create table folder (
 
