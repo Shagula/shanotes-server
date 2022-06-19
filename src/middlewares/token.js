@@ -1,24 +1,27 @@
-const express = require('express')
-const statcode = require('../../config').statcode 
+const statcode = require('../../config').statcode
 const cryption = require('../utils/cryption')
-function token_verify(req, res, next){
+function token_verify(req, res, next) {
     let token;
-    if (res.headers.authorization) {
+    if (req.headers.authorization) {
         token = req.headers.authorization.replace('Bearer ', '')
     }
-    else if (req.cookies.token){
+    else if (req.cookies.token) {
         token = req.cookies.token
     }
     else {
         res.json({
-            status: statcode.invalidated_token,
             meta: {
+                status: statcode.invalidated_token,
                 message: 'invalidated token'
             }
         })
-        return 
+        return
     }
     let user = cryption.jwt_verify(token)
-    req.token = {name: user.name, id: user.id, access: user.access}
+    if (!user)
+        return res.json({ meta: { status: statcode.invalidated_token, message: 'invalid token' } });
+    req.token = { name: user.name, id: user.id, access: user.access }
     next()
 }
+
+module.exports = token_verify;

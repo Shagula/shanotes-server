@@ -63,17 +63,15 @@ sql_connection.check = async function (tab, field, value) {
 				resolve({ verdict: false, err: err })
 			}
 			else {
-				if (res.length != 0){
-					resolve({ verdict: true})
+				if (res.length != 0) {
+					resolve({ verdict: true })
 				}
 				else {
-					resolve({verdict: false})
+					resolve({ verdict: false })
 				}
 			}
 		})
 	})
 }
 
-module.exports = {
-	sql_connection
-}
+module.exports = sql_connection;

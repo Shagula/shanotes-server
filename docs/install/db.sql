@@ -10,31 +10,15 @@ create table user(
   access int
 );
 
-create table notes (
-  id int primary key,
+create table link (
+  id int primary key auto_increment,
+  parent int,
+  link_type int,
   title varchar(200),
-  content text(30000),
-  author int, 
-  create_time datetime default now(),
-  last_update datetime default now(),
-  foreign key (author) references user(id) on delete cascade
-);
-
-create table notebooks (
-  id int primary key,
-  title varchar(200),
-  sequence varchar(5000), 
-  pages int,
+  content text,
   author int,
   create_time datetime default now(),
-  last_update datetime default now(),
+  update_time datetime default now(),
   foreign key (author) references user(id) on delete cascade
 );
 
-create table file (
-
-);
-
-create table folder (
-
-);

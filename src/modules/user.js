@@ -1,4 +1,4 @@
-const sql = require('../drivers/sql').sql_connection
+const sql = require('../drivers/sql');
 const cryption = require('../utils/cryption')
 const statcode = require('../../config').statcode
 async function add_user(name, passwd){

@@ -1,9 +1,12 @@
 module.exports = {
-  sql:{
-    host:'localhost',
-    user:'shanotes',
-    password:'shanotes',
-    database:'shanotes'
+  basic: {
+    port: 80
+  },
+  sql: {
+    host: 'localhost',
+    user: 'shanotes',
+    password: 'shanotes',
+    database: 'shanotes'
   },
   cryption: {
     private_key: 'shagula',
@@ -14,5 +17,4 @@ module.exports = {
     err: 400,
     invalidated_token: 403
   }
-
 }
