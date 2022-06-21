@@ -1,5 +1,12 @@
+const cryption = require('../utils/cryption')
+function check_token(token){
+    token = req.headers.authorization.replace('Bearer ', '')
+    let user = cryption.jwt_verify(token)
+    return user;
+}
+
 function check_login(req, res, next) {
-    if (!req.token) {
+    if (!req.token || !check_token(req.token)) {
         return res.json({
             meta: {
                 status: 403, //用户未登录

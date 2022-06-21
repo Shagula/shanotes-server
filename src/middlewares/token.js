@@ -5,9 +5,6 @@ function token_verify(req, res, next) {
     if (req.headers.authorization) {
         token = req.headers.authorization.replace('Bearer ', '')
     }
-    else if (req.cookies.token) {
-        token = req.cookies.token
-    }
     else {
         res.json({
             meta: {
