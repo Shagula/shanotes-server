@@ -1,12 +1,13 @@
 {
   "name": "shanotes-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "our notes",
   "main": "index.js",
   "scripts": {
     "serve":"cd src && node app.js",
     "back":"cd src && nohup node app.js &",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "stop":"lsof -i:4002 | grep node | grep -oP '[0-9]+' | grep -m1 \"\" | xargs kill -9"
   },
   "repository": {
     "type": "git",
