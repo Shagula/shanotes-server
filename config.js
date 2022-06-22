@@ -1,6 +1,6 @@
 module.exports = {
   basic: {
-    port: 80
+    port: 4002
   },
   sql: {
     host: 'localhost',
