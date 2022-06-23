@@ -6,7 +6,7 @@ function check_token(token){
 }
 
 function check_login(req, res, next) {
-    if (!req.token || !check_token(req.token)) {
+    if (!req.token) {
         return res.json({
             meta: {
                 status: 403, //用户未登录

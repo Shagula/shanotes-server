@@ -6,19 +6,14 @@ function token_verify(req, res, next) {
         token = req.headers.authorization.replace('Bearer ', '')
     }
     else {
-        res.json({
-            meta: {
-                status: statcode.invalidated_token,
-                message: 'invalidated token'
-            }
-        })
-        return
+        return next();
     }
     let user = cryption.jwt_verify(token)
-    if (!user)
-        return res.json({ meta: { status: statcode.invalidated_token, message: 'invalid token' } });
+    if (user == null)
+        return next();
+    console.log(user);
     req.token = { name: user.name, id: user.id, access: user.access }
-    next()
+    return next()
 }
 
 module.exports = token_verify;

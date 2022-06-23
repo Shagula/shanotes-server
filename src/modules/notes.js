@@ -19,20 +19,21 @@ async function create_folder(parent, user_id, name) {
     let sql_ins = 'insert into link(link_type,parent,author,title,content) values(1,?,?,?,?)';
     let sql_res = await sql.qry(sql_ins, [parent, user_id, name, content]);
     if (!sql_res.verdict)
-        return false;
+        return 0;
     if (parent)
         return await update_parent(parent, sql_res.data.insertId);
-    return true;
+    console.log(sql_res);
+    return sql_res.data.insertId;
 }
 
 async function create_note(parent, user_id, title) {
     let sql_ins = 'insert into link(link_type,parent,author,title) values(2,?,?,?)';
     let sql_res = await sql.qry(sql_ins, [parent, user_id, title]);
     if (!sql_res.verdict)
-        return false;
+        return 0;
     if (parent)
         return await update_parent(parent, sql_res.data.insertId);
-    return true;
+    return sql_res.data.insertId;
 }
 
 async function update_link(id, content) {
@@ -97,6 +98,18 @@ async function my_link(id, user_id) {
     let meta = await read_meta(id);
     return meta && meta.author == user_id;
 }
+
+async function root_path(user_id) {
+    let sql_ins =
+        `select id,link_type,title,create_time,update_time 
+    from link 
+    where parent=0 && author=?`;
+    let sql_res = await sql.qry(sql_ins, [user_id]);
+    if (!sql_res.verdict || sql_res.data.length == 0)
+        return null;
+    return sql_res.data;
+}
+
 async function test() {
     console.log(await del_link(2));
 }
@@ -110,5 +123,7 @@ module.exports = {
     read_link,
     del_link,
     get_children,
-    my_link
+    my_link,
+
+    root_path
 }

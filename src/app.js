@@ -10,10 +10,9 @@ app.use(express.static('../public'))
 app.use(express.json())
 app.use(cors());
 
+route(app)
 app.get('/',check_login, (req, res) => {
     res.json({ meta: { status: 200, messgae: 'okay' }, data: "Hello World" });
 })
-
-route(app)
 
 app.listen(config.basic.port);

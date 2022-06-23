@@ -30,7 +30,7 @@
 ```
 
 ### 2. 创建笔记
-1. url: `/notes/create_notes`
+1. url: `/notes/create_note`
 2. method: post
 3. parameter
 
