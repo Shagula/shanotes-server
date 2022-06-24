@@ -1,6 +1,6 @@
 {
   "name": "shanotes-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "our notes",
   "main": "index.js",
   "scripts": {
