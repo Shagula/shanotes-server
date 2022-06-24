@@ -120,3 +120,31 @@
 }
 ```
 
+### 6. 查看文件夹内容
+1. url: `/notes/read_child`
+2. method: post 
+3. parameter
+
+| parameter | type   | remark                                  |
+| --------- | ------ | --------------------------------------- |
+|path_id    | int    | the id of a folder|
+
+4. return 
+
+```json
+{
+    "value": [
+        {
+            "id": 8,
+            "link_type": 1,
+            "title": "Goodmain.md",
+            "create_time": "2022-06-23 23:34:29",
+            "update_time": "2022-06-23 23:34:29"
+        }
+    ],
+    "meta": {
+        "status": 200,
+        "message": "okay"
+    }
+}
+```
