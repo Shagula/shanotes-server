@@ -37,7 +37,7 @@ router.post('/create_note', check_login, async (req, res) => {
 
     let result = await notes.create_note(parent, author, title);
     if (result)
-        return res.json({ meta: { status: statcode.ok, message: 'okay' } });
+        return res.json({ id: result, meta: { status: statcode.ok, message: 'okay' } });
     else
         return res.json({ meta: { status: statcode.err, message: '创建失败' } });
 })

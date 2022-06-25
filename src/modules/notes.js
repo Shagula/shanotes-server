@@ -20,9 +20,10 @@ async function create_folder(parent, user_id, name) {
     let sql_res = await sql.qry(sql_ins, [parent, user_id, name, content]);
     if (!sql_res.verdict)
         return 0;
-    if (parent)
-        return await update_parent(parent, sql_res.data.insertId);
-    console.log(sql_res);
+    if (parent) {
+        if (! await update_parent(parent, sql_res.data.insertId))
+            return 0;
+    }
     return sql_res.data.insertId;
 }
 
@@ -31,8 +32,10 @@ async function create_note(parent, user_id, title) {
     let sql_res = await sql.qry(sql_ins, [parent, user_id, title]);
     if (!sql_res.verdict)
         return 0;
-    if (parent)
-        return await update_parent(parent, sql_res.data.insertId);
+    if (parent) {
+        if (! await update_parent(parent, sql_res.data.insertId))
+            return 0;
+    }
     return sql_res.data.insertId;
 }
 
