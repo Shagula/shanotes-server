@@ -47,7 +47,7 @@ router.get('/read_link', check_login, async (req, res) => {
     let path_id = req.query.path_id;
 
     let content = await notes.read_link(path_id);
-    if (content.author != user_id)
+    if (content == null || content.author != user_id)
         return res.json({ meta: { status: statcode.err, message: '无权访问' } });
     else
         return res.json({ content, meta: { status: statcode.ok, message: 'okay' } });
