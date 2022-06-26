@@ -1,5 +1,6 @@
 const express = require('express')
-const notes = require('../modules/notes');
+
+const notes = require('../models/notes');
 const { check_login, check_admin } = require('../middlewares/check_access');
 let router = express.Router();
 const statcode = require('../../config').statcode;
@@ -88,4 +89,34 @@ router.post('/del_link', check_login, async (req, res) => {
         return res.json({ meta: { status: statcode.ok, message: '删除成功' } });
 
 })
+router.get('/read_meta', check_login, async (req, res) => {
+    let info = req.query, user_id = req.token.id;
+    let path_id = info.path_id, parent = info.parent;
+
+    if (!(await notes.my_link(path_id, user_id)))
+        return res.json({ meta: { status: statcode.err, message: '无权访问' } });
+    let resu = await notes.read_meta(path_id);
+    if (!resu)
+        return res.json({ meta: { status: statcode.err, message: '读取失败' } });
+    else
+        return res.json({ id: path_id, parent: resu.parent, meta: { status: statcode.ok, message: '读取成功' } });
+})
+
+router.post('/move_link', check_login, async (req, res) => {
+    let info = req.body, user_id = req.token.id;
+    let path_id = info.path_id, parent = info.parent;
+
+    if (!(await notes.my_link(path_id, user_id)))
+        return res.json({ meta: { status: statcode.err, message: '无权访问' } });
+
+    let resu = await notes.move_path(path_id, parent);
+    if (!resu) {
+        // console.log(resu);
+        return res.json({ meta: { status: statcode.err, message: '移动失败' } });
+    }
+    else {
+        return res.json({ meta: { status: statcode.ok, message: '移动成功' } });
+    }
+})
+
 module.exports = router;

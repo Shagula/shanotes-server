@@ -125,9 +125,9 @@
 2. method: post 
 3. parameter
 
-| parameter | type   | remark                                  |
-| --------- | ------ | --------------------------------------- |
-|path_id    | int    | the id of a folder|
+| parameter | type | remark             |
+| --------- | ---- | ------------------ |
+| path_id   | int  | the id of a folder |
 
 4. return 
 
@@ -148,3 +148,37 @@
     }
 }
 ```
+
+### 7. 查看元信息
+1. url: `/notes/read_meta`
+2. method: get
+3. parameter
+
+| parameter | type | remark             |
+| --------- | ---- | ------------------ |
+| path_id   | int  | the id of a folder |
+
+4. return 
+```json
+{
+    "id": "109",
+    "parent": 105,
+    "meta": {
+        "status": 200,
+        "message": "读取成功"
+    }
+}
+```
+
+### 8. move_link 移动文件/文件夹
+1. url: `/notes/move_link`
+2. method: post
+3. parameter
+
+| parameter | type | remark             |
+| --------- | ---- | ------------------ |
+| path_id   | int  | the id of a folder |
+| parent    | int  | new parent         |
+
+4. return 200/400
+   

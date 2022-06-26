@@ -11,7 +11,6 @@ function token_verify(req, res, next) {
     let user = cryption.jwt_verify(token)
     if (user == null)
         return next();
-    console.log(user);
     req.token = { name: user.name, id: user.id, access: user.access }
     return next()
 }

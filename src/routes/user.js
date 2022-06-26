@@ -1,5 +1,5 @@
 const express = require('express')
-const user = require('../modules/user')
+const user = require('../models/user')
 const statcode = require('../../config').statcode
 let route = express.Router()
 
