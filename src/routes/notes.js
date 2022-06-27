@@ -1,9 +1,11 @@
 const express = require('express')
-
+const check_link_access = require('../middlewares/note_access');
 const notes = require('../models/notes');
 const { check_login, check_admin } = require('../middlewares/check_access');
-let router = express.Router();
 const statcode = require('../../config').statcode;
+const { json_ret } = require('../utils/util');
+
+let router = express.Router();
 
 router.get('/root', check_login, async (req, res) => {
     let user_id = req.token.id;
@@ -117,6 +119,14 @@ router.post('/move_link', check_login, async (req, res) => {
     else {
         return res.json({ meta: { status: statcode.ok, message: '移动成功' } });
     }
+})
+
+router.post('/rename', check_login, check_link_access, async (req, res) => {
+    let path_id = req.body.path_id;
+    let name = req.body.name;
+    if (!await notes.rename(path_id, name))
+        return json_ret(res,false,"重命名失败")
+    return json_ret(res,true,"okay");
 })
 
 module.exports = router;

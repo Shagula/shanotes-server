@@ -1,13 +1,19 @@
 ### 0. 简表
 
-| 接口名        | 方法 | 进度  |
-| ------------- | ---- | ----- |
-| create_folder | post | OK    |
-| create_notes  | post | OK    |
-| del_link      | post | OK    |
-| update_link   | post | OK    |
-| read_link     | get  | OK    |
-| rename_link   | post | to-do |
+| 接口名        | 方法 | 进度 |
+| ------------- | ---- | ---- |
+| create_folder | post | OK   |
+| create_notes  | post | OK   |
+| del_link      | post | OK   |
+| update_link   | post | OK   |
+| read_link     | get  | OK   |
+| root_path     | get  | OK   |
+| read_child    | get  | OK   |
+| read_meta     | get  | OK   |
+| move_link     | post | OK   |
+| rename        | post | OK   |
+
+
 
 ### 1. 创建文件夹
 1. url: `/notes/create_folder`
@@ -179,6 +185,18 @@
 | --------- | ---- | ------------------ |
 | path_id   | int  | the id of a folder |
 | parent    | int  | new parent         |
+
+4. return 200/400
+   
+### 9. rename 文件/文件夹 修改名称
+1. url: `/notes/rename`
+2. method: post
+3. parameter
+
+| parameter | type   | remark             |
+| --------- | ------ | ------------------ |
+| path_id   | int    | the id of a folder |
+| name      | string | new name           |
 
 4. return 200/400
    

@@ -141,6 +141,16 @@ async function move_path(id, new_par) {
     return true;
 }
 
+// 充命名
+async function rename(id, new_name) {
+    if (new_name.length <= 1)
+        return false;
+    
+    let sql_ins = 'update link set title = ? where id=?';
+    let sql_res = await sql.qry(sql_ins,[new_name,id]);
+
+    return sql_res.verdict;
+}
 async function test() {
     console.log(await del_link(2));
 }
@@ -157,5 +167,6 @@ module.exports = {
     my_link,
 
     root_path,
-    move_path
+    move_path,
+    rename,
 }
