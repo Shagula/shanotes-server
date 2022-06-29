@@ -10,7 +10,7 @@ module.exports = {
   },
   cryption: {
     private_key: 'shagula',
-    exp: 60 * 60 * 24
+    exp: 60 * 60 * 24 * 30
   },
   statcode: {
     ok: 200,
